@@ -85,6 +85,16 @@ module.exports = (repo) => {
       })
     })
 
+    it('create with empty link name', (done) => {
+      DAGNode.create(new Buffer('hello'), [
+        new DAGLink('', 10, 'QmXg9Pp2ytZ14xgmQjYEiHjVjMFXzCVVEcRTWJBmLgR39U')
+      ], (err, node) => {
+        expect(err).to.not.exist
+        expect(node.links[0].name).to.be.eql('')
+        done()
+      })
+    })
+
     it('create an empty node', (done) => {
       expect(7).checks(done)
 
@@ -132,7 +142,7 @@ module.exports = (repo) => {
               .to.eql(node2.multihash)
             expect(node1b.links[0].size)
               .to.eql(node2.size)
-            expect(node1b.links[0].name).to.not.exist
+            expect(node1b.links[0].name).to.be.eql('')
             cb()
           })
         }
@@ -168,7 +178,7 @@ module.exports = (repo) => {
               .to.eql(node2.multihash)
             expect(node1b.links[0].size)
               .to.eql(node2.size)
-            expect(node1b.links[0].name).to.not.exist
+            expect(node1b.links[0].name).to.be.eql('')
             cb()
           })
         }
@@ -204,7 +214,7 @@ module.exports = (repo) => {
               .to.eql(node2.multihash)
             expect(node1b.links[0].size)
               .to.eql(node2.size)
-            expect(node1b.links[0].name).to.not.exist
+            expect(node1b.links[0].name).to.be.eql('')
             cb()
           })
         }
